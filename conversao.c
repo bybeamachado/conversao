@@ -11,7 +11,7 @@
 #define JARDAS 1.09361f
 
 //Colocar caracteres na tela
-linha (int num)
+void linha (int num)
 { 
 	int i;
 	for (i=1 ; i <= num ; i++)
@@ -20,7 +20,7 @@ linha (int num)
 }
 
 
-// Funções para cálculo de áreas
+// FunÃ§Ãµes para cÃ¡lculo de Ã¡reas
 float area_circulo(float diametro)
 {
     float raio = diametro / 2;
@@ -52,7 +52,7 @@ float area_triangulo(float base, float altura)
     	return (base * altura) / 2;
 }
 
-// Funções para cálculo de volumes
+// FunÃ§Ãµes para cÃ¡lculo de volumes
 float volume_esfera(float diametro) 
 {
     float raio = diametro / 2;
@@ -76,7 +76,7 @@ float volume_paralelepipedo(float comprimento, float largura, float altura)
     	return comprimento * largura * altura;
 }
 
-// Funções para conversão de unidades
+// FunÃ§Ãµes para conversÃ£o de unidades
 float metros_para_jardas(float metros) 
 { 
 		return metros * JARDAS; 
@@ -110,7 +110,30 @@ float libras_para_kg(float libras)
 		return libras / LIBRAS; 
 }
 
-// Funções para exibição de menus
+//ConversÃ£o Dinheiro
+float reais_para_dolar(float reais, float cotacao) {
+    return reais / cotacao;
+}
+float reais_para_euro(float reais, float cotacao) {
+    return reais / cotacao;
+}
+float reais_para_ienes(float reais, float cotacao) {
+    return reais * cotacao;
+}
+float dolar_para_reais(float dolar, float cotacao) {
+    return dolar * cotacao;
+}
+float euro_para_reais(float euro, float cotacao) {
+    return euro * cotacao;
+}
+float ienes_para_reais(float ienes, float cotacao) {
+    return ienes / cotacao;
+}
+
+
+
+
+// FunÃ§Ãµes para exibiÃ§Ã£o de menus
 void mostrar_menu_principal() {
     system("cls");
     linha(80);
@@ -120,7 +143,8 @@ void mostrar_menu_principal() {
     printf("\n\t1 - Calcular area de figuras planas");
     printf("\n\t2 - Calcular volume de solidos geometricos");
     printf("\n\t3 - Conversao de medidas");
-    printf("\n\t4 - Sair");
+    printf("\n\t4 - Conversao de dinheiro");
+    printf("\n\t5 - Sair");
     printf("\n\n\t\t\t\tOpcao: ");
 }
 
@@ -171,9 +195,22 @@ void mostrar_menu_conversoes() {
     printf("\n\n\t\t\t\tOpcao: ");
 }
 
+void mostrar_menu_dinheiro() {
+	linha(80);
+    printf("\n\n\t\t********** CONVERSAO DE MOEDAS **********\n\n\n");
+    linha(80);
+    printf("\n\n\t1 - Reais para Dolares");
+    printf("\n\t2 - Reais para Euros");
+    printf("\n\t3 - Reais para Ienes");
+    printf("\n\t4 - Dolares para Reais");
+    printf("\n\t5 - Euros para Reais");
+    printf("\n\t6 - Ienes para Reais");
+    printf("\n\t0 - Voltar ao menu principal");
+    printf("\n\n\t\t\tOpcao: ");
+}
 
 
-// Funções para desenhar formas geométricas
+// FunÃ§Ãµes para desenhar formas geomÃ©tricas
 void desenhar_circulo() {
     int raio = 5, i,j;
     printf("\n\nCirculo:\n\n");
@@ -268,7 +305,7 @@ int main() {
         fflush(stdin);
         
         switch(opcao) {
-            case 1: // Áreas
+            case 1: // Ãreas
                 do {
                     mostrar_menu_areas();
                     scanf("%d", &opcao);
@@ -277,7 +314,7 @@ int main() {
                     float valor1, valor2, valor3, resultado;
                     
                     switch(opcao) {
-					    case 1: // Círculo
+					    case 1: // CÃ­rculo
 					        system("cls");
 					        printf("\nDigite o diametro do circulo: ");
 					        scanf("%f", &valor1);
@@ -308,7 +345,7 @@ int main() {
 					        desenhar_paralelogramo();
 					        break;
 					        
-					    case 4: // Trapézio
+					    case 4: // TrapÃ©zio
 					        system("cls");
 					        printf("\nDigite a base maior: ");
 					        scanf("%f", &valor1);
@@ -321,7 +358,7 @@ int main() {
 					        desenhar_trapezio();
 					        break;
 					        
-					    case 5: // Triângulo
+					    case 5: // TriÃ¢ngulo
 					        system("cls");
 					        printf("\nDigite o lado A: ");
 					        scanf("%f", &valor1);
@@ -345,6 +382,7 @@ int main() {
 					            }
 					        }
 					        break;
+
 					        
         case 0: // Voltar
                             break;
@@ -397,7 +435,7 @@ int main() {
                             printf("\nVolume do cilindro: %.2f", resultado);
                             break;
                             
-                        case 4: // Paralelepípedo
+                        case 4: // ParalelepÃ­pedo
                             system("cls");
                             printf("\nDigite o comprimento: ");
                             scanf("%f", &valor1);
@@ -423,7 +461,7 @@ int main() {
                 } while(opcao != 0);
                 break;
                 
-            case 3: // Conversões
+            case 3: // ConversÃµes
                 do {
                     mostrar_menu_conversoes();
                     scanf("%d", &opcao);
@@ -450,13 +488,13 @@ int main() {
                                 break;
                             case 3:
                                 resultado = cm3_para_pol3(valor);
-                                unidade_origem = "cm³";
-                                unidade_destino = "pol³";
+                                unidade_origem = "cmÂ³";
+                                unidade_destino = "polÂ³";
                                 break;
                             case 4:
                                 resultado = pol3_para_cm3(valor);
-                                unidade_origem = "pol³";
-                                unidade_destino = "cm³";
+                                unidade_origem = "polÂ³";
+                                unidade_destino = "cmÂ³";
                                 break;
                             case 5:
                                 resultado = litros_para_galoes(valor);
@@ -492,7 +530,92 @@ int main() {
                 } while(opcao != 0);
                 break;
                 
-            case 4: // Sair
+            case 4: // ConversÃ£o de dinheiro
+                do {
+                	system("cls");
+                    mostrar_menu_dinheiro();
+                    scanf("%d", &opcao);
+                    fflush(stdin);
+
+                    float valor, cotacao, convertido;
+
+                    switch(opcao) {
+                        case 1:
+                            system("cls");
+                            printf("\nDigite o valor em Reais: R$ ");
+                            scanf("%f", &valor);
+                            printf("Digite a cotacao do Dolar: ");
+                            scanf("%f", &cotacao);
+                            convertido = reais_para_dolar(valor, cotacao);
+                            printf("Em Dolares: $%.2f\n", convertido);
+                            break;
+
+                        case 2:
+                            system("cls");
+                            printf("\nDigite o valor em Reais: R$ ");
+                            scanf("%f", &valor);
+                            printf("Digite a cotacao do Euro: ");
+                            scanf("%f", &cotacao);
+                            convertido = reais_para_euro(valor, cotacao);
+                            printf("Em Euros: %.2f\n", convertido);
+                            break;
+
+                        case 3:
+                            system("cls");
+                            printf("\nDigite o valor em Reais: R$ ");
+                            scanf("%f", &valor);
+                            printf("Digite a cotacao do Iene: ");
+                            scanf("%f", &cotacao);
+                            convertido = reais_para_ienes(valor, cotacao);
+                            printf("Em Iene: %.2f\n", convertido);
+                            break;
+
+                        case 4:
+                            system("cls");
+                            printf("\nDigite o valor em Dolares: $");
+                            scanf("%f", &valor);
+                            printf("Digite a cotacao do Dolar: ");
+                            scanf("%f", &cotacao);
+                            convertido = dolar_para_reais(valor, cotacao);
+                            printf("Em Reais: R$ %.2f\n", convertido);
+                            break;
+
+                        case 5:
+                            system("cls");
+                            printf("\nDigite o valor em Euros: ");
+                            scanf("%f", &valor);
+                            printf("Digite a cotacao do Euro: ");
+                            scanf("%f", &cotacao);
+                            convertido = euro_para_reais(valor, cotacao);
+                            printf("Em Reais: R$ %.2f\n", convertido);
+                            break;
+
+                        case 6:
+                            system("cls");
+                            printf("\nDigite o valor em Iene: ");
+                            scanf("%f", &valor);
+                            printf("Digite a cotacao do Iene: ");
+                            scanf("%f", &cotacao);
+                            convertido = ienes_para_reais(valor, cotacao);
+                            printf("Em Reais: R$ %.2f\n", convertido);
+                            break;
+
+                        case 0:
+                            break;
+
+                        default:
+                            printf("\nOpcao invalida!");
+                    }
+
+                    if(opcao != 0) {
+                        printf("\n\nPressione ENTER para continuar...");
+                        getch();
+                    }
+                } while(opcao != 0);
+                break;
+
+                
+            case 5: // Sair
                 printf("\nSaindo do programa...");
                 break;
                 
@@ -501,7 +624,7 @@ int main() {
                 printf("\n\nPressione ENTER para continuar...");
                 getch();
         }
-    } while(opcao != 4);
+    } while(opcao != 5);
     
     return 0;
 }
